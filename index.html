@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>生产建模课程设计</title>
+    <title>生产建模课程设计 V3</title>
     <style>
       .text{
           width: 35px;
@@ -10,9 +10,12 @@
       #result{
           color: green;
       }
-        #tishi{
+      #tishi{
             color: green;
-        }
+      }
+      #attention{
+          color: red;
+      }
     </style>
     <script>
         /*
@@ -73,6 +76,7 @@
             while(1){
                 if(itemIndex<4){
                     if(itemIndex==0){
+                        sum+=installTime;
                         sum+=installTime;
                     }
                     isInstall=true;
@@ -302,6 +306,7 @@
             }
             var sun_time=JudgeBestCore();
             var use_n=Number(use_time/(Number(Gcnc_time[0])+Number(Gcnc_time[1])+Number(Gcnc_time[2])+Number(Gcnc_time[3])));
+            document.getElementById("attention").innerHTML="注意：一开始安装2个托盘共6分钟，最后回收一次只回收一个托盘（也许我们条件不同，但结果略微修改即可）";
             if(flag==1||flag==2){
                 console.log(use_time+"---"+(Number(Gcnc_time[0])+Number(Gcnc_time[1])+Number(Gcnc_time[2])+Number(Gcnc_time[3]))+"---"+Number(use_n)/10000*10000);
                 document.getElementById("result").innerHTML=str+arr+"<br>总用时："+
@@ -348,7 +353,7 @@
             var best_index=FindBig(solutions);
             console.log("best_index="+best_index);
             document.getElementById("result").innerHTML="最优排序： "+solutions[best_index].arra+"<br>总用时：180"+
-                "     （注意：这里我是按老师说的：最后不是一次回收两个）"+"<br>小车空闲时间：0"+"<br>设备利用率（任务总时间/各机床结束时间和）："+solutions[best_index].use_n+
+                "<br>小车空闲时间：0"+"<br>设备利用率（任务总时间/各机床结束时间和）："+solutions[best_index].use_n+
                 "<br>各机床结束时间: "+solutions[best_index].cnc_over_times;
             console.log("结束");
         }
@@ -367,6 +372,8 @@
         或在<input type="text" id="count" class="text">个最优解中选设备利用率最大的解
         <input type="submit" value="GO" onclick="AllJudge()">
         <p id="result"></p>
+        <br>
+        <p id="attention"></p>
     </div>
     <div>
     </div>
