@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>生产建模课程设计</title>
     <style>
       .text{
           width: 35px;
@@ -45,11 +45,11 @@
             for(var i=0;i<20;i++){
                 var rand=Math.ceil(Math.random() * arr.length) - 1;
                 var temp=arr[rand];
-                console.log(arr);
+                //console.log(arr);
                 arr.splice(rand,1);
                 arr.push(temp);
             }
-            console.log(arr);
+            //console.log(arr);
         }
         function Cnc(isFree,sumTime) {
             this.isFree=isFree;//true表示cnc1可加工
@@ -105,12 +105,12 @@
                         itemIndex++;
                         isInstall=false;
                     }
-                    console.log("第一次if");
-                    console.log("cnc1---"+cnc1.sumTime);
-                    console.log("cnc2---"+cnc2.sumTime);
-                    console.log("cnc3---"+cnc3.sumTime);
-                    console.log("cnc4---"+cnc4.sumTime);
-                    console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
+                    // console.log("第一次if");
+                    // console.log("cnc1---"+cnc1.sumTime);
+                    // console.log("cnc2---"+cnc2.sumTime);
+                    // console.log("cnc3---"+cnc3.sumTime);
+                    // console.log("cnc4---"+cnc4.sumTime);
+                    // console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
                     IsFree(sum,cnc1);
                     IsFree(sum,cnc2);
                     IsFree(sum,cnc3);
@@ -136,16 +136,16 @@
                         sum+=backTime;
                         isInstall=false;
                     }
-                    console.log("第2次if");
-                    console.log("cnc1---"+cnc1.sumTime);
-                    console.log("cnc2---"+cnc2.sumTime);
-                    console.log("cnc3---"+cnc3.sumTime);
-                    console.log("cnc4---"+cnc4.sumTime);
-                    console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
+                    // console.log("第2次if");
+                    // console.log("cnc1---"+cnc1.sumTime);
+                    // console.log("cnc2---"+cnc2.sumTime);
+                    // console.log("cnc3---"+cnc3.sumTime);
+                    // console.log("cnc4---"+cnc4.sumTime);
+                    // console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
                 }
                 if(itemIndex==4){
-                    console.log("itemIndex==4 if------------------------------");
-                    console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
+                    // console.log("itemIndex==4 if------------------------------");
+                    // console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
                     IsFree(sum,cnc1);
                     IsFree(sum,cnc2);
                     IsFree(sum,cnc3);
@@ -183,19 +183,19 @@
                         sum++;
                         freeTime++;
                     }
-                    console.log("cnc1---"+cnc1.sumTime);
-                    console.log("cnc2---"+cnc2.sumTime);
-                    console.log("cnc3---"+cnc3.sumTime);
-                    console.log("cnc4---"+cnc4.sumTime);
-                    console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
+                    // console.log("cnc1---"+cnc1.sumTime);
+                    // console.log("cnc2---"+cnc2.sumTime);
+                    // console.log("cnc3---"+cnc3.sumTime);
+                    // console.log("cnc4---"+cnc4.sumTime);
+                    // console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
                 }
                 if(itemIndex>4 && itemIndex<20){
-                    console.log("itemIndex>=4 && itemIndex<20 if------------------------------");
+                    //console.log("itemIndex>=4 && itemIndex<20 if------------------------------");
                     if(!isInstall){
                         sum+=installTime;
                         isInstall=true;
                     }
-                    console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
+                    //console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
                     IsFree(sum,cnc1);
                     IsFree(sum,cnc2);
                     IsFree(sum,cnc3);
@@ -234,11 +234,11 @@
                         freeTime++;
                     }
 
-                    console.log("cnc1---"+cnc1.sumTime);
-                    console.log("cnc2---"+cnc2.sumTime);
-                    console.log("cnc3---"+cnc3.sumTime);
-                    console.log("cnc4---"+cnc4.sumTime);
-                    console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
+                    // console.log("cnc1---"+cnc1.sumTime);
+                    // console.log("cnc2---"+cnc2.sumTime);
+                    // console.log("cnc3---"+cnc3.sumTime);
+                    // console.log("cnc4---"+cnc4.sumTime);
+                    // console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
                 }
                 //保存各机床最大时间,并进行排序
                 function sortNumber(a,b)
@@ -249,7 +249,7 @@
                     var cnc_time=new Array(cnc1.sumTime,cnc2.sumTime,cnc3.sumTime,cnc4.sumTime);
                     Gcnc_time=new Array(cnc1.sumTime,cnc2.sumTime,cnc3.sumTime,cnc4.sumTime);
                     cnc_time.sort(sortNumber);
-                    console.log(cnc_time);
+                    //console.log(cnc_time);
                     itemIndex++;
                 }
 
@@ -288,25 +288,69 @@
                 arr[12]=45;arr[13]=6;arr[14]=12;arr[15]=0;
                 arr[16]=9;arr[17]=15;arr[18]=28;arr[19]=0;
             }
-            arr.splice(4,1,document.getElementById("A").value);
-            arr.splice(9,1,document.getElementById("B").value);
-            arr.splice(15,1,document.getElementById("C").value);
-            arr.splice(19,1,document.getElementById("D").value);
+            arr.splice(4,1,Number(document.getElementById("A").value));
+            arr.splice(9,1,Number(document.getElementById("B").value));
+            arr.splice(15,1,Number(document.getElementById("C").value));
+            arr.splice(19,1,Number(document.getElementById("D").value));
             // document.getElementById("result").innerHTML="---"+a_num;
             var str;
-            if(flag){RandomArray();str="最优排序: "}
-            else {str="第一问排序: "}
+            if(flag==2||flag==3){RandomArray();str="最优排序: "}
+            else if(flag==1){str="第一问排序: "}
             var use_time=0;
             for(var i=0;i<20;i++){
                 use_time+=Number(arr[i]);
             }
             var sun_time=JudgeBestCore();
             var use_n=Number(use_time/(Number(Gcnc_time[0])+Number(Gcnc_time[1])+Number(Gcnc_time[2])+Number(Gcnc_time[3])));
-            console.log(use_time+"---"+(Number(Gcnc_time[0])+Number(Gcnc_time[1])+Number(Gcnc_time[2])+Number(Gcnc_time[3]))+"---"+Number(use_n)/10000*10000);
-            document.getElementById("result").innerHTML=str+arr+"<br>总用时："+
-                sun_time+"     （注意：这里我是按老师说的：最后不是一次回收两个）"+"<br>小车空闲时间："+GfreeTime+"<br>设备利用率（任务总时间/各机床结束时间和）："+use_n.toFixed(2)+
-            "<br>各机床结束时间: "+Gcnc_time;
-            document.getElementById("tishi").innerHTML="  <---多点几次可得到多个最优解  (小车空闲时间为0)"
+            if(flag==1||flag==2){
+                console.log(use_time+"---"+(Number(Gcnc_time[0])+Number(Gcnc_time[1])+Number(Gcnc_time[2])+Number(Gcnc_time[3]))+"---"+Number(use_n)/10000*10000);
+                document.getElementById("result").innerHTML=str+arr+"<br>总用时："+
+                    sun_time+"     （注意：这里我是按老师说的：最后不是一次回收两个）"+"<br>小车空闲时间："+GfreeTime+"<br>设备利用率（任务总时间/各机床结束时间和）："+use_n.toFixed(2)+
+                    "<br>各机床结束时间: "+Gcnc_time;
+                document.getElementById("tishi").innerHTML="  <---多点几次可得到多个最优解  (小车空闲时间为0)";
+            }else if(flag==3){
+                console.log("分割分割分割分割分割分割分割分割分割");
+                return new Solution(arr.slice(0).reverse(),use_n.toFixed(2),Gcnc_time.slice(0).reverse(),GfreeTime);
+            }
+        }
+        function Solution(arra,use_n,cnc_over_times,car_free_time) {
+            this.arra=Array(arra).slice(0);
+            this.use_n=use_n;
+            this.cnc_over_times=Array(cnc_over_times).slice(0);
+            this.car_free_time=car_free_time;
+        }
+        function FindBig(solutions) {
+            var max_num=0;
+            var max_index=0;
+            for(var i=0;i<solutions.length;i++){
+                if(max_num<Number(solutions[i].use_n)){
+                    max_num=Number(solutions[i].use_n);
+                    max_index=i;
+                    console.log(max_index);
+                }
+            }
+            console.log(max_index);
+            return max_index;
+        }
+        function AllJudge() {
+            var solution;
+            var solutions=new Array();
+            for(var i=0;i<Number(document.getElementById("count").value);i++){
+                solution=JudgeBest(3);
+                if(solution.car_free_time == 0){
+                    solutions.push(new Solution(solution.arra.slice(0),solution.use_n,solution.cnc_over_times.slice(0),solution.car_free_time));
+                }
+            }
+            console.log("solutions.length=="+solutions.length);
+            for(var i=0;i<solutions.length;i++){
+                console.log(solutions[i]);
+            }
+            var best_index=FindBig(solutions);
+            console.log("best_index="+best_index);
+            document.getElementById("result").innerHTML="最优排序： "+solutions[best_index].arra+"<br>总用时：180"+
+                "     （注意：这里我是按老师说的：最后不是一次回收两个）"+"<br>小车空闲时间：0"+"<br>设备利用率（任务总时间/各机床结束时间和）："+solutions[best_index].use_n+
+                "<br>各机床结束时间: "+solutions[best_index].cnc_over_times;
+            console.log("结束");
         }
     </script>
 </head>
@@ -317,8 +361,11 @@
         B: <input type="text" id="B" class="text">
         C: <input type="text" id="C" class="text">
         D: <input type="text" id="D" class="text">
-        <input type="submit" value="生成初始解(第一问)" onclick="JudgeBest(false)">
-        <input type="submit" value="生成最优解" onclick="JudgeBest(true)"><a id="tishi"></a>
+        <input type="submit" value="生成初始解(第一问)" onclick="JudgeBest(1)">
+        <input type="submit" value="生成最优解" onclick="JudgeBest(2)"><a id="tishi"></a>
+        <br>
+        或在<input type="text" id="count" class="text">个最优解中选设备利用率最大的解
+        <input type="submit" value="GO" onclick="AllJudge()">
         <p id="result"></p>
     </div>
     <div>
