@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      .text{
+          width: 35px;
+      }
+      #result{
+          color: green;
+      }
+        #tishi{
+            color: green;
+        }
+    </style>
+    <script>
+        /*
+        var num =1;
+        document.write(num+"---"+typeof(num)+"<br>");
+        num =NaN;
+        document.write(num+"<br>");
+        document.write(1/2);
+        var sum=0;
+        for (var i=0;i<10;i++)
+        {
+            sum+=i;
+        }
+        document.write("<br>"+sum);
+        */
+        var GfreeTime=0;//小车空闲时间
+        var Gcnc_time=new Array();
+        var a=0;var b=0;var c=0;var d=0;
+        var installTime=3;
+        var goTime=2;
+        var changeTime=1;
+        var backTime=3;
+        var arr=new Array();
+        arr[0]=27;arr[1]=15;arr[2]=17;arr[3]=12;
+        arr[4]=0;arr[5]=15;arr[6]=7;arr[7]=8;
+        arr[8]=12;arr[9]=0;arr[10]=2;arr[11]=9;
+        arr[12]=45;arr[13]=6;arr[14]=12;arr[15]=0;
+        arr[16]=9;arr[17]=15;arr[18]=28;arr[19]=0;
+        function RandomArray() {
+            for(var i=0;i<20;i++){
+                var rand=Math.ceil(Math.random() * arr.length) - 1;
+                var temp=arr[rand];
+                console.log(arr);
+                arr.splice(rand,1);
+                arr.push(temp);
+            }
+            console.log(arr);
+        }
+        function Cnc(isFree,sumTime) {
+            this.isFree=isFree;//true表示cnc1可加工
+            this.sumTime=sumTime;
+        }
+        function IsFree(sum,cnc) {
+            if(sum<cnc.sumTime)
+                cnc.isFree=false;
+            else
+                cnc.isFree=true;
+        }
+        function JudgeBestCore() {
+            var freeTime=0;
+            var cnc1=new Cnc(true,0);
+            var cnc2=new Cnc(true,0);
+            var cnc3=new Cnc(true,0);
+            var cnc4=new Cnc(true,0);
+            var itemIndex=0;
+            var sum= new Number(0) ;
+            var isInstall=false;
+            while(1){
+                if(itemIndex<4){
+                    if(itemIndex==0){
+                        sum+=installTime;
+                    }
+                    isInstall=true;
+                    IsFree(sum,cnc1);
+                    IsFree(sum,cnc2);
+                    IsFree(sum,cnc3);
+                    IsFree(sum,cnc4);
+                    if(cnc1.isFree){
+                        sum+=goTime;
+                        sum+=changeTime;
+                        cnc1.sumTime=Number(sum)+Number(arr[itemIndex]);
+                        itemIndex++;
+                        isInstall=false;
+                    }else if(cnc2.isFree){
+                        sum+=goTime;
+                        sum+=changeTime;
+                        cnc2.sumTime=Number(sum)+Number(arr[itemIndex]);
+                        itemIndex++;
+                        isInstall=false;
+                    }else if(cnc3.isFree){
+                        sum+=goTime;
+                        sum+=changeTime;
+                        cnc3.sumTime=Number(sum)+Number(arr[itemIndex]);
+                        itemIndex++;
+                        isInstall=false;
+                    }else if(cnc4.isFree){
+                        sum+=goTime;
+                        sum+=changeTime;
+                        cnc4.sumTime=Number(sum)+Number(arr[itemIndex]);
+                        itemIndex++;
+                        isInstall=false;
+                    }
+                    console.log("第一次if");
+                    console.log("cnc1---"+cnc1.sumTime);
+                    console.log("cnc2---"+cnc2.sumTime);
+                    console.log("cnc3---"+cnc3.sumTime);
+                    console.log("cnc4---"+cnc4.sumTime);
+                    console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
+                    IsFree(sum,cnc1);
+                    IsFree(sum,cnc2);
+                    IsFree(sum,cnc3);
+                    IsFree(sum,cnc4);
+                    if(cnc1.isFree){
+                        cnc1.sumTime=Number(sum)+Number(arr[itemIndex]);
+                        itemIndex++;
+                        sum+=backTime;
+                        isInstall=false;
+                    }else if(cnc2.isFree){
+                        cnc2.sumTime=Number(sum)+Number(arr[itemIndex]);
+                        itemIndex++;
+                        sum+=backTime;
+                        isInstall=false;
+                    }else if(cnc3.isFree){
+                        cnc3.sumTime=Number(sum)+Number(arr[itemIndex]);
+                        itemIndex++;
+                        sum+=backTime;
+                        isInstall=false;
+                    }else if(cnc4.isFree){
+                        cnc4.sumTime=Number(sum)+Number(arr[itemIndex]);
+                        itemIndex++;
+                        sum+=backTime;
+                        isInstall=false;
+                    }
+                    console.log("第2次if");
+                    console.log("cnc1---"+cnc1.sumTime);
+                    console.log("cnc2---"+cnc2.sumTime);
+                    console.log("cnc3---"+cnc3.sumTime);
+                    console.log("cnc4---"+cnc4.sumTime);
+                    console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
+                }
+                if(itemIndex==4){
+                    console.log("itemIndex==4 if------------------------------");
+                    console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
+                    IsFree(sum,cnc1);
+                    IsFree(sum,cnc2);
+                    IsFree(sum,cnc3);
+                    IsFree(sum,cnc4);
+                    if(cnc1.isFree){
+                        sum+=goTime;
+                        sum+=changeTime;
+                        cnc1.sumTime=Number(sum)+Number(arr[itemIndex]);
+                        itemIndex++;
+                        sum+=backTime;
+                        isInstall=false;
+                    }else if(cnc2.isFree){
+                        sum+=goTime;
+                        sum+=changeTime;
+                        cnc2.sumTime=Number(sum)+Number(arr[itemIndex]);
+                        itemIndex++;
+                        sum+=backTime;
+                        isInstall=false;
+                    }else if(cnc3.isFree){
+                        sum+=goTime;
+                        sum+=changeTime;
+                        cnc3.sumTime=Number(sum)+Number(arr[itemIndex]);
+                        itemIndex++;
+                        sum+=backTime;
+                        isInstall=false;
+                    }else if(cnc4.isFree){
+                        sum+=goTime;
+                        sum+=changeTime;
+                        cnc4.sumTime=Number(sum)+Number(arr[itemIndex]);
+                        itemIndex++;
+                        sum+=backTime;
+                        isInstall=false;
+                    }
+                    else {
+                        sum++;
+                        freeTime++;
+                    }
+                    console.log("cnc1---"+cnc1.sumTime);
+                    console.log("cnc2---"+cnc2.sumTime);
+                    console.log("cnc3---"+cnc3.sumTime);
+                    console.log("cnc4---"+cnc4.sumTime);
+                    console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
+                }
+                if(itemIndex>4 && itemIndex<20){
+                    console.log("itemIndex>=4 && itemIndex<20 if------------------------------");
+                    if(!isInstall){
+                        sum+=installTime;
+                        isInstall=true;
+                    }
+                    console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
+                    IsFree(sum,cnc1);
+                    IsFree(sum,cnc2);
+                    IsFree(sum,cnc3);
+                    IsFree(sum,cnc4);
+                    if(cnc1.isFree){
+                        sum+=goTime;
+                        sum+=changeTime;
+                        cnc1.sumTime=Number(sum)+Number(arr[itemIndex]);
+                        itemIndex++;
+                        sum+=backTime;
+                        isInstall=false;
+                    }else if(cnc2.isFree){
+                        sum+=goTime;
+                        sum+=changeTime;
+                        cnc2.sumTime=Number(sum)+Number(arr[itemIndex]);
+                        itemIndex++;
+                        sum+=backTime;
+                        isInstall=false;
+                    }else if(cnc3.isFree){
+                        sum+=goTime;
+                        sum+=changeTime;
+                        cnc3.sumTime=Number(sum)+Number(arr[itemIndex]);
+                        itemIndex++;
+                        sum+=backTime;
+                        isInstall=false;
+                    }else if(cnc4.isFree){
+                        sum+=goTime;
+                        sum+=changeTime;
+                        cnc4.sumTime=Number(sum)+Number(arr[itemIndex]);
+                        itemIndex++;
+                        sum+=backTime;
+                        isInstall=false;
+                    }
+                    else {
+                        sum++;
+                        freeTime++;
+                    }
+
+                    console.log("cnc1---"+cnc1.sumTime);
+                    console.log("cnc2---"+cnc2.sumTime);
+                    console.log("cnc3---"+cnc3.sumTime);
+                    console.log("cnc4---"+cnc4.sumTime);
+                    console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
+                }
+                //保存各机床最大时间,并进行排序
+                function sortNumber(a,b)
+                {
+                    return a - b
+                }
+                if(itemIndex==20){
+                    var cnc_time=new Array(cnc1.sumTime,cnc2.sumTime,cnc3.sumTime,cnc4.sumTime);
+                    Gcnc_time=new Array(cnc1.sumTime,cnc2.sumTime,cnc3.sumTime,cnc4.sumTime);
+                    cnc_time.sort(sortNumber);
+                    console.log(cnc_time);
+                    itemIndex++;
+                }
+
+                //回收时间
+                if(itemIndex>20){
+                    if(sum>=cnc_time[0]){
+                        sum+=goTime;
+                        sum+=changeTime;
+                        sum+=backTime;
+                        cnc_time.shift();
+                    }else{
+                        sum++;
+                        freeTime++;
+                    }
+                    if(cnc_time.length==0){
+                        GfreeTime=freeTime;
+                        return sum;
+                    }
+                }
+            }
+        }
+        function JudgeBest(flag) {
+            GfreeTime=0;
+            // document.getElementById("A").value=38;
+            // document.getElementById("B").value=8;
+            // document.getElementById("C").value=13;
+            // document.getElementById("D").value=4;
+
+            //替换元素
+            if(!(a==document.getElementById("A").value && b==document.getElementById("B").value && c==document.getElementById("C").value&&d==document.getElementById("D").value))
+            {
+                //如果输入框值有变化
+                arr[0]=27;arr[1]=15;arr[2]=17;arr[3]=12;
+                arr[4]=0;arr[5]=15;arr[6]=7;arr[7]=8;
+                arr[8]=12;arr[9]=0;arr[10]=2;arr[11]=9;
+                arr[12]=45;arr[13]=6;arr[14]=12;arr[15]=0;
+                arr[16]=9;arr[17]=15;arr[18]=28;arr[19]=0;
+            }
+            arr.splice(4,1,document.getElementById("A").value);
+            arr.splice(9,1,document.getElementById("B").value);
+            arr.splice(15,1,document.getElementById("C").value);
+            arr.splice(19,1,document.getElementById("D").value);
+            // document.getElementById("result").innerHTML="---"+a_num;
+            var str;
+            if(flag){RandomArray();str="最优排序: "}
+            else {str="第一问排序: "}
+            var use_time=0;
+            for(var i=0;i<20;i++){
+                use_time+=Number(arr[i]);
+            }
+            var sun_time=JudgeBestCore();
+            var use_n=Number(use_time/(Number(Gcnc_time[0])+Number(Gcnc_time[1])+Number(Gcnc_time[2])+Number(Gcnc_time[3])));
+            console.log(use_time+"---"+(Number(Gcnc_time[0])+Number(Gcnc_time[1])+Number(Gcnc_time[2])+Number(Gcnc_time[3]))+"---"+Number(use_n)/10000*10000);
+            document.getElementById("result").innerHTML=str+arr+"<br>总用时："+
+                sun_time+"     （注意：这里我是按老师说的：最后不是一次回收两个）"+"<br>小车空闲时间："+GfreeTime+"<br>设备利用率（任务总时间/各机床结束时间和）："+use_n.toFixed(2)+
+            "<br>各机床结束时间: "+Gcnc_time;
+            document.getElementById("tishi").innerHTML="  <---多点几次可得到多个最优解  (小车空闲时间为0)"
+        }
+    </script>
+</head>
+<body>
+    <div>请输入ABCD(你的四个数)</div>
+    <div>
+        A: <input type="text" id="A" class="text">
+        B: <input type="text" id="B" class="text">
+        C: <input type="text" id="C" class="text">
+        D: <input type="text" id="D" class="text">
+        <input type="submit" value="生成初始解(第一问)" onclick="JudgeBest(false)">
+        <input type="submit" value="生成最优解" onclick="JudgeBest(true)"><a id="tishi"></a>
+        <p id="result"></p>
+    </div>
+    <div>
+    </div>
+</body>
+</html>
