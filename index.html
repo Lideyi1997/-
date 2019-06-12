@@ -1,34 +1,35 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>生产建模课程设计 V4</title>
     <style>
-      .text{
-          width: 35px;
-      }
-      #result{
-          color: green;
-      }
-      #tishi{
+        .text{
+            width: 35px;
+        }
+        #result{
             color: green;
-      }
-      #attention{
-          color: red;
-      }
-      .button {
-          background-color: #4CAF50;
-          border: none;
-          color: white;
-          padding: 15px 32px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-          margin: 4px 2px;
-          cursor: pointer;
-          //border-radius: 12px;
-      }
+        }
+        #tishi{
+            color: green;
+        }
+        #attention{
+            color: red;
+        }
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        //border-radius: 12px;
+        }
     </style>
     <script>
         /*
@@ -322,7 +323,7 @@
             }
             var sun_time=JudgeBestCore();
             var use_n=Number(use_time/(Number(Gcnc_time[0])+Number(Gcnc_time[1])+Number(Gcnc_time[2])+Number(Gcnc_time[3])));
-            document.getElementById("attention").innerHTML="注意：一开始安装2个托盘共6分钟，最后回收一次只回收一个托盘（也许我们条件不同，但结果略微修改即可）";
+            document.getElementById("attention").innerHTML="注意：一开始安装2个托盘共6分钟，最后回收一次只回收一个托盘（这就是为什么不是174）（也许我们条件不同，但结果略微修改即可）";
             if(flag==1||flag==2){
                 console.log(use_time+"---"+(Number(Gcnc_time[0])+Number(Gcnc_time[1])+Number(Gcnc_time[2])+Number(Gcnc_time[3]))+"---"+Number(use_n)/10000*10000);
                 document.getElementById("result").innerHTML=str+arr+"<br>总用时："+
@@ -377,24 +378,32 @@
     </script>
 </head>
 <body>
-    <div>请输入ABCD(你的四个数)</div>
-    <div>
-        A: <input type="text" id="A" class="text">
-        B: <input type="text" id="B" class="text">
-        C: <input type="text" id="C" class="text">
-        D: <input type="text" id="D" class="text">
-        <input type="submit" value="生成初始解(第一问)" onclick="JudgeBest(1)" class="button">
-        <input type="submit" value="生成最优解" onclick="JudgeBest(2)" class="button"><a id="tishi"></a>
-        <br>
-        或在<input type="text" id="count" class="text">个最优解中选设备利用率最大的解
-        <input type="submit" value="GO" onclick="AllJudge()" class="button">
-        <p id="result"></p>
-        <br>
-        <p id="attention"></p>
-        <br>
-        <p id="attention2">注意：如果你刷新或打开网页，网页没有更新（不是最新版），请清理浏览器缓存或换一个浏览器访问</p>
-    </div>
-    <div>
-    </div>
+<div>请输入ABCD(你的四个数)</div>
+<div>
+    A: <input type="text" id="A" class="text">
+    B: <input type="text" id="B" class="text">
+    C: <input type="text" id="C" class="text">
+    D: <input type="text" id="D" class="text">
+    <input type="submit" value="生成初始解(第一问)" onclick="JudgeBest(1)" class="button">
+    <input type="submit" value="生成最优解" onclick="JudgeBest(2)" class="button"><a id="tishi"></a>
+    <br>
+    或在<input type="text" id="count" class="text">个最优解中选设备利用率最大的解
+    <input type="submit" value="GO" onclick="AllJudge()" class="button">
+    <p id="result"></p>
+    <br>
+    <p id="attention"></p>
+    <br>
+    <p id="attention2">-------------------------------
+        <br>当在每次安装结束后，判断是否有机床空闲，若有多个机床空闲，因规定一个选择哪个机床加工的策略。
+        有2种策略。
+        策略一是按机床顺序选择。如机床A、B、C、D，若机床A和机床C空闲，则选择机床A。
+        策略二是按机床加工结束时间小选择。如机床A、B、C、D，若机床A和机床C空闲，若C是先加工结束的机床，则选择机床C。
+        <br>此页面是策略一！！！！！按机床顺序加工！<a href="https://lideyi1997.github.io/scjmkcsj2/">策略二点这里</a>
+        <br>源码：右键->查看源文件
+        <br>注意：如果你刷新或打开网页，网页没有更新（不是最新版），请清理浏览器缓存或换一个浏览器访问
+    </p>
+</div>
+<div>
+</div>
 </body>
 </html>
