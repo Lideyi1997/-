@@ -3,10 +3,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>生产建模课程设计 V4</title>
+    <title>生产建模课程设计 V6</title>
     <style>
         .text{
-            width: 35px;
+            width: 50px;
         }
         #result{
             color: green;
@@ -16,6 +16,9 @@
         }
         #attention{
             color: red;
+        }
+        #order{
+            width: 300px;
         }
         .button {
             background-color: #4CAF50;
@@ -45,6 +48,8 @@
         }
         document.write("<br>"+sum);
         */
+        var outStr="";
+        var outOrder=false;
         var GfreeTime=0;//小车空闲时间
         var Gcnc_time=new Array();
         var a=0;var b=0;var c=0;var d=0;
@@ -96,6 +101,14 @@
                     if(itemIndex==2){
                         sum+=installTime;
                     }
+                    if(outOrder){
+                        outStr=String(outStr)+"任务"+(itemIndex+1)+"  -----"+"<br />"
+                            +"机床A："+cnc1.sumTime+"<br />"
+                            +"机床B："+cnc2.sumTime+"<br />"
+                            +"机床C："+cnc3.sumTime+"<br />"
+                            +"机床D："+cnc4.sumTime+"<br />";
+                        //console.log("----"+itemIndex);
+                    }
                     isInstall=true;
                     IsFree(sum,cnc1);
                     IsFree(sum,cnc2);
@@ -126,12 +139,20 @@
                         itemIndex++;
                         isInstall=false;
                     }
-                    console.log("第一次if");
-                    console.log("cnc1---"+cnc1.sumTime);
-                    console.log("cnc2---"+cnc2.sumTime);
-                    console.log("cnc3---"+cnc3.sumTime);
-                    console.log("cnc4---"+cnc4.sumTime);
-                    console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
+                    if(outOrder){
+                        outStr=String(outStr)+"任务"+(itemIndex+1)+"  -----"+"<br />"
+                            +"机床A："+cnc1.sumTime+"<br />"
+                            +"机床B："+cnc2.sumTime+"<br />"
+                            +"机床C："+cnc3.sumTime+"<br />"
+                            +"机床D："+cnc4.sumTime+"<br />";
+                        //console.log("----"+itemIndex);
+                    }
+                    // console.log("第一次if");
+                    // console.log("cnc1---"+cnc1.sumTime);
+                    // console.log("cnc2---"+cnc2.sumTime);
+                    // console.log("cnc3---"+cnc3.sumTime);
+                    // console.log("cnc4---"+cnc4.sumTime);
+                    // console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
                     IsFree(sum,cnc1);
                     IsFree(sum,cnc2);
                     IsFree(sum,cnc3);
@@ -157,20 +178,28 @@
                         sum+=backTime;
                         isInstall=false;
                     }
-                    console.log("第2次if");
-                    console.log("cnc1---"+cnc1.sumTime);
-                    console.log("cnc2---"+cnc2.sumTime);
-                    console.log("cnc3---"+cnc3.sumTime);
-                    console.log("cnc4---"+cnc4.sumTime);
-                    console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
+                    // console.log("第2次if");
+                    // console.log("cnc1---"+cnc1.sumTime);
+                    // console.log("cnc2---"+cnc2.sumTime);
+                    // console.log("cnc3---"+cnc3.sumTime);
+                    // console.log("cnc4---"+cnc4.sumTime);
+                    // console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
                 }
                 if(itemIndex==4){
-                    console.log("itemIndex==4 if------------------------------");
-                    console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
+                    //console.log("itemIndex==4 if------------------------------");
+                    //console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
                     IsFree(sum,cnc1);
                     IsFree(sum,cnc2);
                     IsFree(sum,cnc3);
                     IsFree(sum,cnc4);
+                    if(outOrder){
+                        outStr=String(outStr)+"任务"+(itemIndex+1)+"  -----"+"<br />"
+                            +"机床A："+cnc1.sumTime+"<br />"
+                            +"机床B："+cnc2.sumTime+"<br />"
+                            +"机床C："+cnc3.sumTime+"<br />"
+                            +"机床D："+cnc4.sumTime+"<br />";
+                        console.log("----"+itemIndex);
+                    }
                     if(cnc1.isFree){
                         sum+=goTime;
                         sum+=changeTime;
@@ -204,11 +233,11 @@
                         sum++;
                         freeTime++;
                     }
-                    console.log("cnc1---"+cnc1.sumTime);
-                    console.log("cnc2---"+cnc2.sumTime);
-                    console.log("cnc3---"+cnc3.sumTime);
-                    console.log("cnc4---"+cnc4.sumTime);
-                    console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
+                    // console.log("cnc1---"+cnc1.sumTime);
+                    // console.log("cnc2---"+cnc2.sumTime);
+                    // console.log("cnc3---"+cnc3.sumTime);
+                    // console.log("cnc4---"+cnc4.sumTime);
+                    // console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
                 }
                 if(itemIndex>4 && itemIndex<20){
                     //console.log("itemIndex>=4 && itemIndex<20 if------------------------------");
@@ -254,7 +283,6 @@
                         sum++;
                         freeTime++;
                     }
-
                     // console.log("cnc1---"+cnc1.sumTime);
                     // console.log("cnc2---"+cnc2.sumTime);
                     // console.log("cnc3---"+cnc3.sumTime);
@@ -270,10 +298,8 @@
                     var cnc_time=new Array(cnc1.sumTime,cnc2.sumTime,cnc3.sumTime,cnc4.sumTime);
                     Gcnc_time=new Array(cnc1.sumTime,cnc2.sumTime,cnc3.sumTime,cnc4.sumTime);
                     cnc_time.sort(sortNumber);
-                    //console.log(cnc_time);
                     itemIndex++;
                 }
-
                 //回收时间
                 if(itemIndex>20){
                     if(sum>=cnc_time[0]){
@@ -286,10 +312,22 @@
                         freeTime++;
                     }
                     if(cnc_time.length==0){
+                        console.log("arr:"+arr);
                         GfreeTime=freeTime;
                         return sum;
                     }
                 }
+                if(outOrder){
+                    outStr=String(outStr)+"任务"+(itemIndex+1)+"  -----"+"<br />"
+                        +"机床A："+cnc1.sumTime+"<br />"
+                        +"机床B："+cnc2.sumTime+"<br />"
+                        +"机床C："+cnc3.sumTime+"<br />"
+                        +"机床D："+cnc4.sumTime+"<br />";
+                    //console.log("----"+itemIndex);
+                }
+                console.log("Gcnc_time:"+Gcnc_time);
+                console.log("机床："+cnc1.sumTime
+                    +" "+cnc2.sumTime+" "+cnc3.sumTime+" "+cnc4.sumTime);
             }
         }
         function JudgeBest(flag) {
@@ -325,14 +363,15 @@
             var use_n=Number(use_time/(Number(Gcnc_time[0])+Number(Gcnc_time[1])+Number(Gcnc_time[2])+Number(Gcnc_time[3])));
             document.getElementById("attention").innerHTML="注意：一开始安装2个托盘共6分钟，最后回收一次只回收一个托盘（这就是为什么不是174）（也许我们条件不同，但结果略微修改即可）";
             if(flag==1||flag==2){
-                console.log(use_time+"---"+(Number(Gcnc_time[0])+Number(Gcnc_time[1])+Number(Gcnc_time[2])+Number(Gcnc_time[3]))+"---"+Number(use_n)/10000*10000);
+                //console.log(use_time+"---"+(Number(Gcnc_time[0])+Number(Gcnc_time[1])+Number(Gcnc_time[2])+Number(Gcnc_time[3]))+"---"+Number(use_n)/10000*10000);
                 document.getElementById("result").innerHTML=str+arr+"<br>总用时："+
                     sun_time+"<br>小车空闲时间："+GfreeTime+"<br>设备利用率（任务总时间/各机床结束时间和）："+use_n.toFixed(2)+
                     "<br>各机床结束时间: "+Gcnc_time;
                 document.getElementById("tishi").innerHTML="  <---多点几次可得到多个最优解  (小车空闲时间为0)";
             }else if(flag==3){
-                console.log("分割分割分割分割分割分割分割分割分割");
-                return new Solution(arr.slice(0).reverse(),use_n.toFixed(2),Gcnc_time.slice(0).reverse(),GfreeTime,sun_time);
+                //console.log("分割分割分割分割分割分割分割分割分割");
+                console.log("各机床结束时间: "+Gcnc_time);
+                return new Solution(arr.slice(0),use_n.toFixed(2),Gcnc_time.slice(0),GfreeTime,sun_time);
             }
         }
         function Solution(arra,use_n,cnc_over_times,car_free_time,sun_time) {
@@ -349,31 +388,51 @@
                 if(max_num<Number(solutions[i].use_n)){
                     max_num=Number(solutions[i].use_n);
                     max_index=i;
-                    console.log(max_index);
+                    //console.log(max_index);
                 }
             }
-            console.log(max_index);
+            //console.log(max_index);
             return max_index;
         }
         function AllJudge() {
             var solution;
             var solutions=new Array();
             for(var i=0;i<Number(document.getElementById("count").value);i++){
+                console.log("------");
                 solution=JudgeBest(3);
-                if(solution.car_free_time == 0){
+                console.log(solution);
+                if(solution.car_free_time == 0 || solution.cnc_over_times[0]!=0){
                     solutions.push(new Solution(solution.arra.slice(0),solution.use_n,solution.cnc_over_times.slice(0),solution.car_free_time,solution.sun_time));
+                    console.log(solution);
                 }
             }
-            console.log("solutions.length=="+solutions.length);
-            for(var i=0;i<solutions.length;i++){
-                console.log(solutions[i]);
-            }
+            //console.log("solutions.length=="+solutions.length);
             var best_index=FindBig(solutions);
-            console.log("best_index="+best_index);
+            //console.log("best_index="+best_index);
             document.getElementById("result").innerHTML="最优排序： "+solutions[best_index].arra+"<br>总用时："+
                 solutions[best_index].sun_time+"<br>小车空闲时间：0"+"<br>设备利用率（任务总时间/各机床结束时间和）："+solutions[best_index].use_n+
                 "<br>各机床结束时间: "+solutions[best_index].cnc_over_times;
             console.log("结束");
+            console.log(solutions[best_index]);
+        }
+        function Order() {
+            var orderStr=document.getElementById("order").value.split(",");
+            var use_time=0;
+            for(var i=0;i<orderStr.length;i++){
+                outStr=String(outStr)+String(orderStr[i])+"<br />";
+            }
+            for(var i=0;i<orderStr.length;i++){
+                arr[i]=Number(orderStr[i]);
+                use_time+=Number(orderStr[i]);
+            }
+            outOrder=true;
+            var sun_time=JudgeBestCore();
+            var use_n=Number(use_time/(Number(Gcnc_time[0])+Number(Gcnc_time[1])+Number(Gcnc_time[2])+Number(Gcnc_time[3])));
+            document.getElementById("attention3").innerHTML=outStr+"<br>总用时："+
+                sun_time+"<br>小车空闲时间："+GfreeTime+"<br>设备利用率（任务总时间/各机床结束时间和）："+use_n.toFixed(2)+
+                "<br>各机床结束时间: "+Gcnc_time;;
+            outStr="";
+            outOrder=false;
         }
     </script>
 </head>
@@ -389,9 +448,14 @@
     <br>
     或在<input type="text" id="count" class="text">个最优解中选设备利用率最大的解
     <input type="submit" value="GO" onclick="AllJudge()" class="button">
+    <br>
+    或输入排序序列<input type="text" id="order" class="text">
+    <input type="submit" value="输出排序过程" onclick="Order()" class="button" id="order">
     <p id="result"></p>
     <br>
     <p id="attention"></p>
+    <br>
+    <p id="attention3"></p>
     <br>
     <p id="attention2">-------------------------------
         <br>当在每次安装结束后，判断是否有机床空闲，若有多个机床空闲，因规定一个选择哪个机床加工的策略。
