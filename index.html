@@ -94,6 +94,11 @@
             var isInstall=false;
             while(1){
                 if(itemIndex<4){
+                    var cnc1_flag=false;
+                    var cnc2_flag=false;
+                    var cnc3_flag=false;
+                    var cnc4_flag=false;
+
                     if(itemIndex==0){
                         sum+=installTime;
                         sum+=installTime;
@@ -109,35 +114,39 @@
                             +"机床D："+cnc4.sumTime+"<br />";
                         //console.log("----"+itemIndex);
                     }
-                    isInstall=true;
                     IsFree(sum,cnc1);
                     IsFree(sum,cnc2);
                     IsFree(sum,cnc3);
                     IsFree(sum,cnc4);
+                    isInstall=true;
                     if(cnc1.isFree){
                         sum+=goTime;
                         sum+=changeTime;
                         cnc1.sumTime=Number(sum)+Number(arr[itemIndex]);
                         itemIndex++;
                         isInstall=false;
+                        cnc1_flag=true;
                     }else if(cnc2.isFree){
                         sum+=goTime;
                         sum+=changeTime;
                         cnc2.sumTime=Number(sum)+Number(arr[itemIndex]);
                         itemIndex++;
                         isInstall=false;
+                        cnc2_flag=true;
                     }else if(cnc3.isFree){
                         sum+=goTime;
                         sum+=changeTime;
                         cnc3.sumTime=Number(sum)+Number(arr[itemIndex]);
                         itemIndex++;
                         isInstall=false;
+                        cnc3_flag=true;
                     }else if(cnc4.isFree){
                         sum+=goTime;
                         sum+=changeTime;
                         cnc4.sumTime=Number(sum)+Number(arr[itemIndex]);
                         itemIndex++;
                         isInstall=false;
+                        cnc4_flag=true;
                     }
                     if(outOrder){
                         outStr=String(outStr)+"任务"+(itemIndex+1)+"  -----"+"<br />"
@@ -147,32 +156,29 @@
                             +"机床D："+cnc4.sumTime+"<br />";
                         //console.log("----"+itemIndex);
                     }
+
                     // console.log("第一次if");
                     // console.log("cnc1---"+cnc1.sumTime);
                     // console.log("cnc2---"+cnc2.sumTime);
                     // console.log("cnc3---"+cnc3.sumTime);
                     // console.log("cnc4---"+cnc4.sumTime);
                     // console.log("itemIndex---"+itemIndex+" sum---"+sum+" freeTime---"+freeTime);
-                    IsFree(sum,cnc1);
-                    IsFree(sum,cnc2);
-                    IsFree(sum,cnc3);
-                    IsFree(sum,cnc4);
-                    if(cnc1.isFree){
+                    if(cnc1.isFree && !cnc1_flag){
                         cnc1.sumTime=Number(sum)+Number(arr[itemIndex]);
                         itemIndex++;
                         sum+=backTime;
                         isInstall=false;
-                    }else if(cnc2.isFree){
+                    }else if(cnc2.isFree && !cnc2_flag){
                         cnc2.sumTime=Number(sum)+Number(arr[itemIndex]);
                         itemIndex++;
                         sum+=backTime;
                         isInstall=false;
-                    }else if(cnc3.isFree){
+                    }else if(cnc3.isFree && !cnc3_flag){
                         cnc3.sumTime=Number(sum)+Number(arr[itemIndex]);
                         itemIndex++;
                         sum+=backTime;
                         isInstall=false;
-                    }else if(cnc4.isFree){
+                    }else if(cnc4.isFree && !cnc4_flag){
                         cnc4.sumTime=Number(sum)+Number(arr[itemIndex]);
                         itemIndex++;
                         sum+=backTime;
@@ -401,7 +407,7 @@
                 console.log("------");
                 solution=JudgeBest(3);
                 console.log(solution);
-                if(solution.car_free_time == 0 || solution.cnc_over_times[0]!=0){
+                if(solution.car_free_time == 0 && solution.sun_time==186){
                     solutions.push(new Solution(solution.arra.slice(0),solution.use_n,solution.cnc_over_times.slice(0),solution.car_free_time,solution.sun_time));
                     console.log(solution);
                 }
@@ -418,9 +424,9 @@
         function Order() {
             var orderStr=document.getElementById("order").value.split(",");
             var use_time=0;
-            for(var i=0;i<orderStr.length;i++){
-                outStr=String(outStr)+String(orderStr[i])+"<br />";
-            }
+            // for(var i=0;i<orderStr.length;i++){
+            //     outStr=String(outStr)+String(orderStr[i])+"<br />";
+            // }
             for(var i=0;i<orderStr.length;i++){
                 arr[i]=Number(orderStr[i]);
                 use_time+=Number(orderStr[i]);
